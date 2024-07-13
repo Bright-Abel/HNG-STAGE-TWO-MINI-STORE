@@ -1,0 +1,16 @@
+export { default as NavBar } from './NavBar';
+export { default as FirstHero } from './FirstHero';
+export { default as FirstImgCont } from './FirstImgCont';
+export { default as SecondImgCont } from './SecondImgCont';
+export { default as Footer } from './Footer';
+export { default as CartHeroFirst } from './CartHeroFirst';
+export { default as CartHeroSec } from './CartHeroSec';
+export { default as CartHeroThird } from './CartHeroThird';
+export { default as CheckOutFrstHero } from './CheckOutFrstHero';
+export { default as CheckOutSecondHero } from './CheckOutSecondHero';
+export { default as SuccessFirstHero } from './SuccessFirstHero';
+export { default as SuccessSecondHero } from './SuccessSecondHero';
+export { default as PaymentFirstHero } from './PaymentFirstHero';
+export { default as PaymentSecondHero } from './PaymentSecondHero';
+export { default as ProductView } from './ProductView';
+export { default as Loading } from './Loading';
