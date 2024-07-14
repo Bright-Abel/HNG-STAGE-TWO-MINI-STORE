@@ -1,1 +1,15 @@
-/*  /index.html  200
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://api.timbu.cloud/:splat"
+  status = 200
+  force = true
+
+  
+[[redirects]]
+from = '/*'
+to = '/index.html'
+status = 200 (edited) 
