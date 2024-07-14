@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.6",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "nanoid": "^5.0.7",
