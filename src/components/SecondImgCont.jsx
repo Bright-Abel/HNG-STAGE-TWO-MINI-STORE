@@ -29,7 +29,7 @@ const SecondImgCont = ({ items }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap w-full ">
+      <div className="flex flex-wrap w-full gap-x-8 md:gap-x-5 gap-y-3">
         {myArr.map((item, index) => {
           const { unique_id, description, name, photos, current_price, id } =
             item;
@@ -77,7 +77,7 @@ export default SecondImgCont;
 
 const Wrapper = styled.section`
   .card {
-    margin-left: 1rem;
+    /* margin-right: 1rem; */
     /* padding: 0; */
     margin-bottom: 10px;
     text-align: center;
