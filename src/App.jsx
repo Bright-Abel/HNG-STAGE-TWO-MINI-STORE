@@ -22,6 +22,10 @@ import { loader as productLoader } from './pages/ProductPage';
 import { loader as cartLoader } from './pages/CartPage';
 import { loader as checkoutLoader } from './pages/CheckoutPage';
 import { loader as singleLoader } from './pages/SinglePage';
+import { loader as paymentLoader } from './pages/PaymentPage';
+import { loader as successLoader } from './pages/Success';
+
+import { store } from './store';
 
 // import ScrollToTop from './pages/ScrollToTop';
 
@@ -46,14 +50,17 @@ const router = createBrowserRouter([
         path: 'checkout',
         element: <CheckoutPage />,
         loader: checkoutLoader,
+        // loader: checkoutLoader,
       },
       {
         path: 'success',
         element: <Success />,
+        loader: successLoader,
       },
       {
         path: 'payment',
         element: <PaymentPage />,
+        loader: paymentLoader,
       },
       {
         path: 'product',

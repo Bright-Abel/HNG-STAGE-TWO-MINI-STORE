@@ -19,8 +19,8 @@ const CheckOutSecondHero = () => {
   }, [items]);
   const [amount, setAmount] = useState(1);
 
-  const handleClick = (id) => {
-    let myData = myArr.filter((item) => item.unique_id === id);
+  const handleClick = (data) => {
+    let myData = myArr.filter((item) => item.unique_id === data);
     const { description, name, photos, current_price, unique_id } = myData[0];
     const images = photos[0].url;
     const price = current_price[0]?.NGN[0];
@@ -35,8 +35,6 @@ const CheckOutSecondHero = () => {
       amount,
     };
     dispatch(addItem(cartProduct));
-    let newNumb = amount + 1;
-    setAmount(newNumb);
 
     toast.success('Item has been added to cart.', {
       className:
@@ -57,11 +55,35 @@ const CheckOutSecondHero = () => {
           const { unique_id, description, name, current_price, photos, id } =
             item;
           return (
-            <Link
-              to={`/product/${id}`}
-              key={unique_id}
-              className="relative flex items-center hover:scale-[1.02] duration-500 cursor-pointer bg-[#FCFAF7] shadow-xl justify-between gap-8  py-8 px-4 rounded-lg"
-            >
+            <div className="relative">
+              <Link
+                to={`/product/${id}`}
+                key={unique_id}
+                className="relative flex items-center hover:scale-[1.02] duration-500 cursor-pointer bg-[#FCFAF7] shadow-xl justify-between gap-8  py-8 px-4 rounded-lg"
+              >
+                <div className=" flex flex-col  gap-4  text-center w-1/2 ">
+                  <h3 className="font-bold text-xl text-[#565D64] ">
+                    ₦{current_price[0]?.NGN[0]}
+                  </h3>
+                  <div className=" ">
+                    <h1 className=" capitalize text-[1.2rem] leading-8 md:text-2xl font-bold text-[#194E6A]">
+                      {name}
+                    </h1>
+                    <p className="textStyle text-[#194E6A] text-[7px] text-left md:text-[12px]">
+                      {description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* image div */}
+                <div className="w-[40%]">
+                  <img
+                    src={`https://api.timbu.cloud/images/${photos[0].url}`}
+                    alt={description}
+                    className="h-40 object-cover"
+                  />
+                </div>
+              </Link>
               <button
                 type="button"
                 onClick={() => handleClick(unique_id)}
@@ -69,29 +91,7 @@ const CheckOutSecondHero = () => {
               >
                 Add to cart
               </button>
-              <div className=" flex flex-col  gap-4  text-center w-1/2 ">
-                <h3 className="font-bold text-xl text-[#565D64] ">
-                  ₦{current_price[0]?.NGN[0]}
-                </h3>
-                <div className=" ">
-                  <h1 className=" capitalize text-[1.2rem] leading-8 md:text-2xl font-bold text-[#194E6A]">
-                    {name}
-                  </h1>
-                  <p className="textStyle text-[#194E6A] text-[7px] text-left md:text-[12px]">
-                    {description}
-                  </p>
-                </div>
-              </div>
-
-              {/* image div */}
-              <div className="w-[40%]">
-                <img
-                  src={`https://api.timbu.cloud/images/${photos[0].url}`}
-                  alt={description}
-                  className="h-40 object-cover"
-                />
-              </div>
-            </Link>
+            </div>
           );
         })}
       </div>

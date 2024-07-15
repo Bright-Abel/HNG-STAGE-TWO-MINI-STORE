@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { NavBar } from '../components';
 import { generateAmountOptions } from '../custom/baseUrl';
 import Stars from '../components/Stars';
+import { toast } from 'react-toastify';
 
 const params = {
   organization_id: import.meta.env.VITE_ORG_ID,
@@ -63,10 +64,11 @@ const SinglePage = () => {
   const cartProduct = {
     cartID: data.id + unique_id,
     productID: data.id,
-    image,
+    images: image,
     name,
     price,
     amount,
+    description,
   };
 
   const addToCart = () => {

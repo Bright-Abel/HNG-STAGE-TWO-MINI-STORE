@@ -4,10 +4,12 @@ import search from '../assets/searchCart.png';
 import { useSelector } from 'react-redux';
 import { IoSearch } from 'react-icons/io5';
 import { MdOutlineShoppingCartCheckout } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CartReusableComponent from './CartReusableComponent';
 const CartHeroFirst = () => {
-  const { cartItems } = useSelector((store) => store.cart);
+  const { cartItems, numItemsInCart } = useSelector((store) => store.cart);
+  const navigate = useNavigate();
+
   return (
     <Wrapper className="mt-10">
       <div className=" flex justify-center items-center gap-4">
@@ -16,6 +18,10 @@ const CartHeroFirst = () => {
           Here’s your cart
         </h2>
       </div>
+      {/* <h3 className="text-lg sm:text-xl md:text-3xl text-center mt-10 font-semibold text-[#6C6C6C]">
+        You have <span className="text-[#F26722]">{numItemsInCart}</span>{' '}
+        {numItemsInCart > 1 ? 'items' : 'item'} in your cart
+      </h3> */}
       <CartReusableComponent items={cartItems} />
       <div className="w-full flex gap-6 flex-col lg:flex-row lg:items-start items-center  text-white mt-6">
         <Link
@@ -24,22 +30,31 @@ const CartHeroFirst = () => {
           className="lg:w-1/2 w-[80%] flex font-[700] items-center justify-center bg-[#37A8E5] py-4 rounded-sm gap-2 hover:shadow-custom-light duration-500 hover:scale-[.98] text-lg xl:text-2xl"
         >
           {cartItems.length < 1 ? (
-            <span>Fill Cart</span>
+            <span className="text-sm mg:text-lg lg:text-xl">Fill Cart</span>
           ) : (
             <>
-              <span>Add more items</span>
+              <span className="text-sm mg:text-lg lg:text-xl">
+                Add more items
+              </span>
               <IoSearch className="text-lg xl:text-2xl" />
             </>
           )}
         </Link>
-        <Link
-          to="/checkout"
+        <button
+          onClick={() => navigate('/checkout')}
           type="button"
-          className="lg:w-1/2 w-[80%] flex font-[700] items-center justify-center bg-[#F26722] py-4 rounded-sm gap-2 hover:shadow-xl duration-500 hover:scale-[.98] text-lg xl:text-2xl"
+          className={`lg:w-1/2 w-[80%] flex font-[700] items-center justify-center bg-[#F26722] py-4 rounded-sm gap-2 hover:shadow-xl duration-500 hover:scale-[.98] text-lg xl:text-2xl ${
+            cartItems.length < 1 ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+          disabled={cartItems.length < 1}
         >
-          <span>Check out</span>
+          <span className="text-sm mg:text-lg lg:text-xl">
+            {cartItems.length < 1
+              ? 'Please fill your cart before checking out'
+              : 'Check out'}
+          </span>
           <MdOutlineShoppingCartCheckout className="text-lg xl:text-2xl" />
-        </Link>
+        </button>
       </div>
     </Wrapper>
   );

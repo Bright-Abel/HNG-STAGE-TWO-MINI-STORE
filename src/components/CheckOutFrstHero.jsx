@@ -12,11 +12,12 @@ import { useDispatch } from 'react-redux';
 const CheckOutFrstHero = () => {
   const { cartTotal, cartItems } = useSelector((store) => store.cart);
   const total = ((34 / 100) * cartTotal).toFixed(2);
+  const newTotal = (cartTotal - total).toFixed(2);
 
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (cartID) => {
-    console.log(cartID);
+    // console.log(cartID);
     dispatch(removeItem({ cartID }));
     toast.error('Item has been removed from cart.', {
       className:
@@ -58,7 +59,7 @@ const CheckOutFrstHero = () => {
                 </div>
 
                 <div className="self-stretch mt-10">
-                  <h4 className="text-[#2A3038] font-[500] whitespace-nowrap text-[.6rem] md:text-lg truncate">
+                  <h4 className="text-[#2A3038] font-[500] whitespace-normal lg:whitespace-nowrap text-[.6rem] md:text-lg truncate">
                     {description}
                   </h4>
                   <h2 className="text-[#2A3038] font-[500] text-lg md:text-2xl">
@@ -88,7 +89,7 @@ const CheckOutFrstHero = () => {
         </h2>
         <div className="">
           <h2 className="text-[#F26722] font-[700] text-sm sm:text-lg md:text-2xl">
-            ₦{cartTotal}
+            ₦{newTotal}
           </h2>
           <div className="mt-[-.1rem] md:mt-[.5rem]">
             <small className="text-[#F5854E] text-[.6rem] md:text-sm mr-1">

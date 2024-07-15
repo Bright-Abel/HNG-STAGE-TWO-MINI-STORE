@@ -33,8 +33,6 @@ const FirstImgCont = ({ items }) => {
       amount,
     };
     dispatch(addItem(cartProduct));
-    let newNumb = amount + 1;
-    setAmount(newNumb);
 
     toast.success('Item has been added to cart.', {
       className:
@@ -49,11 +47,35 @@ const FirstImgCont = ({ items }) => {
         const { unique_id, description, name, current_price, photos, id } =
           item;
         return (
-          <Link
-            to={`/product/${id}`}
-            key={unique_id}
-            className="relative flex items-center hover:scale-[1.02] duration-500 cursor-pointer bg-[#FCFAF7] shadow-xl justify-between gap-8  py-8 px-4 rounded-lg"
-          >
+          <div className="relative">
+            <Link
+              to={`/product/${id}`}
+              key={unique_id}
+              className="relative flex items-center hover:scale-[1.02] duration-500 cursor-pointer bg-[#FCFAF7] shadow-xl justify-between gap-8  py-8 px-4 rounded-lg"
+            >
+              <div className=" flex flex-col  gap-4  text-center ">
+                <h3 className="font-bold text-xl text-[#565D64] ">
+                  ₦{current_price[0]?.NGN[0]}
+                </h3>
+                <div className=" ">
+                  <h1 className=" capitalize text-[1.2rem] leading-8 md:text-3xl font-bold text-[#194E6A]">
+                    {name}
+                  </h1>
+                  <p className="whitespace-nowrap text-[#194E6A] text-[9px] md:text-[12px]">
+                    {description}
+                  </p>
+                </div>
+              </div>
+
+              {/* image div */}
+              <div className="w-[40%]">
+                <img
+                  src={`https://api.timbu.cloud/images/${photos[0].url}`}
+                  alt={description}
+                  className="w-40 h-40 object-contain"
+                />
+              </div>
+            </Link>
             <button
               type="button"
               onClick={() => handleClick(unique_id)}
@@ -61,29 +83,7 @@ const FirstImgCont = ({ items }) => {
             >
               Add to cart
             </button>
-            <div className=" flex flex-col  gap-4  text-center ">
-              <h3 className="font-bold text-xl text-[#565D64] ">
-                ₦{current_price[0]?.NGN[0]}
-              </h3>
-              <div className=" ">
-                <h1 className=" capitalize text-[1.2rem] leading-8 md:text-3xl font-bold text-[#194E6A]">
-                  {name}
-                </h1>
-                <p className="whitespace-nowrap text-[#194E6A] text-[9px] md:text-[12px]">
-                  {description}
-                </p>
-              </div>
-            </div>
-
-            {/* image div */}
-            <div className="w-[40%]">
-              <img
-                src={`https://api.timbu.cloud/images/${photos[0].url}`}
-                alt={description}
-                className="w-40 h-40 object-contain"
-              />
-            </div>
-          </Link>
+          </div>
         );
       })}
     </div>

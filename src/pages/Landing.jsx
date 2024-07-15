@@ -11,7 +11,6 @@ export const loader = async () => {
   const {
     data: { items },
   } = await authFetch.get('products', { params });
-  console.log(items);
 
   return { items };
 };

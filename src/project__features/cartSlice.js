@@ -41,7 +41,7 @@ const cartSlice = createSlice({
     editItem: (state, action) => {
       const { id, amount } = action.payload;
       const item = state.cartItems.find((i) => i.cartID === id);
-      console.log(item);
+
       state.numItemsInCart += amount - item.amount;
       state.cartTotal += item.price * (amount - item.amount);
       item.amount = amount;
@@ -54,25 +54,30 @@ const cartSlice = createSlice({
     },
     toggleCart: (state, action) => {
       const { value, id } = action.payload;
-      const tempData = state.cartItems.map((item) => {
-        let newAmt = item.amount; // Initialize newAmt with current amount
-        if (item.cartID === id) {
-          if (value === 'inc') {
-            newAmt = item.amount + 1;
-            cartSlice.caseReducers.calculateTotals(state);
-          } else if (value === 'dec') {
-            newAmt = item.amount - 1;
-            if (newAmt < 1) {
-              newAmt = 1;
-              cartSlice.caseReducers.calculateTotals(state);
+      state.cartItems = state.cartItems
+        .map((item) => {
+          let newAmt = item.amount; // Initialize newAmt with current amount
+          if (item.cartID === id) {
+            if (value === 'inc') {
+              newAmt = item.amount + 1;
+              state.numItemsInCart += 1;
+              state.cartTotal += item.price;
+            } else if (value === 'dec') {
+              newAmt = item.amount - 1;
+              state.numItemsInCart -= 1;
+              state.cartTotal -= item.price;
             }
+            return { ...item, amount: newAmt };
+          } else {
+            return item;
           }
-          return { ...item, amount: newAmt };
-        } else {
-          return item;
-        }
-      });
-      state.cartItems = tempData; // Update state directly
+        })
+        .filter((item) => item.amount > 0); // Remove items with amount < 1
+    },
+
+    zeroCartDel: (state) => {
+      const tempCart = state.cartItems.filter((item) => item.amount > 0);
+      return { ...state, cartItems: tempCart };
     },
   },
 });
@@ -84,6 +89,7 @@ export const {
   editItem,
   calculateTotals,
   toggleCart,
+  zeroCartDel,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

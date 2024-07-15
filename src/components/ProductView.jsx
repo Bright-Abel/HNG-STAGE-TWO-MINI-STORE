@@ -26,9 +26,10 @@ const ProductView = () => {
   }, [items]);
 
   // console.log(getUniqueValue(items, 'unique_id'));
-  const handleClick = (id) => {
-    let myData = newArray.filter((item) => item.unique_id === id);
-    const { description, name, photos, current_price, unique_id } = myData[0];
+  const handleClick = (dat) => {
+    let myData = newArray.filter((item) => item.unique_id === dat);
+    const { description, name, photos, current_price, unique_id, id } =
+      myData[0];
     const images = photos[0].url;
     const price = current_price[0]?.NGN[0];
 
@@ -65,39 +66,42 @@ const ProductView = () => {
     .map((item, index) => {
       const { unique_id, description, name, current_price, photos, id } = item;
       return (
-        <Link
-          to={`/product/${id}`}
+        <div
+          // to={`/product/${id}`}
           key={unique_id}
           className=" bg-white  hover:shadow-2xl  relative rounded-lg flex flex-col gap-3 lg:gap-6 w-[calc(50%-6px)] md:w-[calc(33.333%-8px)] lg:w-[calc(25%-8px)] cursor-pointer lg:hover:scale-[1.02] duration-500"
         >
-          <img
-            src={`https://api.timbu.cloud/images/${photos[0].url}`}
-            alt={name}
-            className="rounded-t-lg "
-          />
-          <span className=" lg:hidden absolute top-3 right-3 block text-[#f68b1e] bg-[#fef3e9]  rounded-sm py-[2px] px-1 font-medium  text-sm lg:text-sm">
-            -{(index + 4) * 7}%
-          </span>
-          <div className="px-2 py-2">
-            <span className=" bg-[#276076] text-[.625rem] py-[2px] px-2 font-medium w-fit rounded-[2px] text-white">
-              {unique_id} - items in Stock
+          <Link to={`/product/${id}`}>
+            <img
+              src={`https://api.timbu.cloud/images/${photos[0].url}`}
+              alt={name}
+              className="rounded-t-lg "
+            />
+            <span className=" lg:hidden absolute top-3 right-3 block text-[#f68b1e] bg-[#fef3e9]  rounded-sm py-[2px] px-1 font-medium  text-sm lg:text-sm">
+              -{(index + 4) * 7}%
             </span>
-            <span></span>
-            <div className="">
-              <h3 className="text-[.75rem] leading-tight overflow-hidden textStyle font-[400] ">
-                {description}
-              </h3>
-              <h5 className="text-[.875rem] font-[500] mt-[4px] ">
-                ₦{current_price[0]?.NGN?.[0] || 2500}
-              </h5>
-              <div className="flex gap-2">
-                {/* bg-[#fef3e9] */}
-                <span className="hidden lg:block text-[#f68b1e] bg-[#fef3e9]  rounded-sm py-[2px] px-1 font-medium  text-sm lg:text-sm">
-                  -{(index + 4) * 7}%
-                </span>
+            <div className="px-2 py-2">
+              <span className=" bg-[#276076] text-[.625rem] py-[2px] px-2 font-medium w-fit rounded-[2px] text-white">
+                {unique_id} - items in Stock
+              </span>
+              <span></span>
+              <div className="">
+                <h3 className="text-[.75rem] leading-tight overflow-hidden textStyle font-[400] ">
+                  {description}
+                </h3>
+                <h5 className="text-[.875rem] font-[500] mt-[4px] ">
+                  ₦{current_price[0]?.NGN?.[0] || 2500}
+                </h5>
+                <div className="flex gap-2">
+                  {/* bg-[#fef3e9] */}
+                  <span className="hidden lg:block text-[#f68b1e] bg-[#fef3e9]  rounded-sm py-[2px] px-1 font-medium  text-sm lg:text-sm">
+                    -{(index + 4) * 7}%
+                  </span>
+                </div>
               </div>
             </div>
-
+          </Link>
+          <div className="px-2 py-2">
             <button
               onClick={() => handleClick(unique_id)}
               type="button"
@@ -106,7 +110,7 @@ const ProductView = () => {
               Add to cart
             </button>
           </div>
-        </Link>
+        </div>
       );
     });
 

@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 const authFetch = axios.create({
-  baseURL: 'https://api.timbu.cloud/',
+  baseURL: '/api/',
   headers: {
     Accept: 'application/json',
   },
 });
-
+//https://api.timbu.cloud/
 export const getUniqueValue = (data, type) => {
   let unique = data.map((val) => val[type]);
   // if (type === 'colors') {
   //   unique = unique.flat();
   // }
-  return ['all', ...new Set(unique)];
+  return [...new Set(unique)];
 };
 
 export const generateAmountOptions = (number) => {
