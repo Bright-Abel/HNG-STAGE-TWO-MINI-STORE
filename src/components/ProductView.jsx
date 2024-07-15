@@ -118,6 +118,7 @@ const ProductView = () => {
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
   };
   return (
     <Wrapper className="">
