@@ -86,7 +86,10 @@ const CartReusableComponent = ({ items }) => {
                 <button
                   type="button"
                   onClick={() => decrease(cartID)}
-                  className="bg-[#3C3C3C] p-2 text-white hover:scale-[.9] hover:bg-[#37A8E5] duration-500"
+                  className={`bg-[#3C3C3C] p-2 text-white hover:scale-[.9] hover:bg-[#37A8E5]  duration-500 ${
+                    amount === 1 && 'opacity-50 cursor-not-allowed'
+                  } `}
+                  disabled={amount === 1}
                 >
                   <FaMinus className="text-[#C3E9FE]" />
                 </button>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authFetch = axios.create({
-  baseURL: 'https://api.timbu.cloud/',
+  baseURL: '/api/',
   headers: {
     Accept: 'application/json',
   },

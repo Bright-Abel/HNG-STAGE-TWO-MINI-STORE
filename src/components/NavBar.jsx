@@ -2,13 +2,12 @@ import person from '../assets/Ellipse26.png';
 import love from '../assets/love.png';
 import search from '../assets/Vector.png';
 import menu from '../assets/vec.svg';
-import profile from '../assets/person.svg';
-import cart from '../assets/cart.svg';
-import bar from '../assets/menuIcon.svg';
+import { useSelector } from 'react-redux';
 import { navBarLogo } from '../custom/data';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { Link } from 'react-router-dom';
 const NavBar = ({ searchDisplay }) => {
+  const { numItemsInCart } = useSelector((store) => store.cart);
   return (
     <nav className="align-el">
       <div className="flex flex-wrap justify-between items-center pt-4">
@@ -28,8 +27,18 @@ const NavBar = ({ searchDisplay }) => {
               const { id, url, text, img } = item;
               return (
                 <>
-                  <Link key={id} to={url} data-tooltip-id={id}>
+                  <Link
+                    key={id}
+                    to={url}
+                    data-tooltip-id={id}
+                    className="relative"
+                  >
                     <img src={img} alt={text} className="w-5" />
+                    {text === 'cart' && (
+                      <p className="bg-[#F6996B] text-sm absolute top-[-15px] right-[-15px] px-2 rounded-md text-white ">
+                        {numItemsInCart}
+                      </p>
+                    )}
                   </Link>
                   <ReactTooltip
                     id={id}
@@ -62,8 +71,18 @@ const NavBar = ({ searchDisplay }) => {
             const { id, url, text, img } = item;
             return (
               <>
-                <Link key={id} to={url} data-tooltip-id={id}>
+                <Link
+                  key={id}
+                  to={url}
+                  data-tooltip-id={id}
+                  className="relative"
+                >
                   <img src={img} alt={text} className="w-5" />
+                  {text === 'cart' && (
+                    <p className="bg-[#F6996B] text-sm absolute top-[-15px] right-[-15px] px-2 rounded-md text-white ">
+                      {numItemsInCart}
+                    </p>
+                  )}
                 </Link>
                 <ReactTooltip
                   id={id}
